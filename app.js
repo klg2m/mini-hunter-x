@@ -265,7 +265,131 @@ function runEngines(candles) {
     document.getElementById("prob-up").innerText = prob.up + "%";
     document.getElementById("prob-down").innerText = prob.down + "%";
     document.getElementById("prob-range").innerText = prob.range + "%";
-  }// ------------------------------
+            }// ------------------------------
+// بخش ۴ — Zone + Momentum + Wick + S/R + Noise + MicroTrend
+// ------------------------------
+
+// ------------------------------
+// Zone Engine (موقعیت قیمت)
+// ------------------------------
+function getZone(candles) {
+    const last = candles[candles.length - 1];
+    const high = last.high;
+    const low = last.low;
+    const close = last.close;
+
+    const pos = (close - low) / (high - low);
+
+    if (pos > 0.7) return "بالای محدوده (قدرت خریدار)";
+    if (pos < 0.3) return "پایین محدوده (قدرت فروشنده)";
+    return "میانه محدوده (رنج)";
+}
+
+// ------------------------------
+// Momentum Engine (زاویه حرکت)
+// ------------------------------
+function getMomentum(candles) {
+    const last = candles[candles.length - 1];
+    const prev = candles[candles.length - 2];
+
+    const diff = last.close - prev.close;
+
+    if (diff > last.close * 0.01) return "مومنتوم مثبت";
+    if (diff < -last.close * 0.01) return "مومنتوم منفی";
+    return "مومنتوم خنثی";
+}
+
+// ------------------------------
+// Wick Ratio (نسبت شدو)
+// ------------------------------
+function getWickRatio(candles) {
+    const last = candles[candles.length - 1];
+
+    const body = Math.abs(last.close - last.open);
+    const wick = (last.high - last.low) - body;
+
+    if (body === 0) return 0;
+
+    return (wick / body).toFixed(2);
+}
+
+// ------------------------------
+// Support / Resistance ساده
+// ------------------------------
+function getSupportResistance(candles) {
+    const last20 = candles.slice(-20);
+
+    const highs = last20.map(c => c.high);
+    const lows = last20.map(c => c.low);
+
+    const resistance = Math.max(...highs);
+    const support = Math.min(...lows);
+
+    return { support, resistance };
+}
+
+// ------------------------------
+// Noise Filter (فیلتر نویز)
+// ------------------------------
+function getNoise(candles) {
+    const last = candles[candles.length - 1];
+    const body = Math.abs(last.close - last.open);
+    const range = last.high - last.low;
+
+    if (range === 0) return "نویز بالا";
+
+    const ratio = body / range;
+
+    if (ratio < 0.2) return "نویز بالا";
+    if (ratio < 0.4) return "نویز متوسط";
+    return "نویز کم";
+}
+
+// ------------------------------
+// Micro Trend (روند خرد)
+// ------------------------------
+function getMicroTrend(candles) {
+    const last = candles[candles.length - 1];
+    const prev = candles[candles.length - 2];
+    const prev2 = candles[candles.length - 3];
+
+    if (last.close > prev.close && prev.close > prev2.close) return "صعود خرد";
+    if (last.close < prev.close && prev.close < prev2.close) return "نزول خرد";
+    return "خنثی";
+}
+
+// ------------------------------
+// اتصال خروجی‌ها به صفحه
+// ------------------------------
+function runEngines(candles) {
+    // خروجی‌های قبلی
+    document.getElementById("trend").innerText = getTrend(candles);
+    document.getElementById("heat").innerText = getHeatScore(candles);
+    document.getElementById("early").innerText = getEarlySignal(candles);
+    document.getElementById("prime").innerText = getPrimeSignal(candles);
+
+    const power = getPower(candles);
+    document.getElementById("buyer").innerText = power.buyer;
+    document.getElementById("seller").innerText = power.seller;
+    document.getElementById("last-candle").innerText = power.lastCandle;
+
+    const prob = getProbabilities(candles);
+    document.getElementById("prob-up").innerText = prob.up + "%";
+    document.getElementById("prob-down").innerText = prob.down + "%";
+    document.getElementById("prob-range").innerText = prob.range + "%";
+
+    // بخش ۴
+    document.getElementById("zone").innerText = getZone(candles);
+    document.getElementById("momentum").innerText = getMomentum(candles);
+    document.getElementById("wick").innerText = getWickRatio(candles);
+
+    const sr = getSupportResistance(candles);
+    document.getElementById("support").innerText = sr.support.toFixed(2);
+    document.getElementById("resistance").innerText = sr.resistance.toFixed(2);
+
+    document.getElementById("noise").innerText = getNoise(candles);
+    document.getElementById("microtrend").innerText = getMicroTrend(candles);
+}// ------------------------------
 // بخش ۴ — Zone + Momentum + Wick + S/R + Noise + MicroTrend
 // ------------------------------
 
