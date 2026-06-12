@@ -1,1 +1,100 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini‑Hunter X</title>
 
+    <!-- استایل اصلی -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- چارت -->
+    <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
+
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+</head>
+
+<body>
+
+    <h2 class="title">Mini‑Hunter X</h2>
+
+    <!-- انتخاب ارز -->
+    <select id="symbol" class="dropdown">
+        <option value="BTCUSDT">BTC/USDT</option>
+        <option value="ETHUSDT">ETH/USDT</option>
+        <option value="BNBUSDT">BNB/USDT</option>
+        <option value="SOLUSDT">SOL/USDT</option>
+        <option value="XRPUSDT">XRP/USDT</option>
+        <option value="DOGEUSDT">DOGE/USDT</option>
+    </select>
+
+    <!-- انتخاب تایم‌فریم -->
+    <select id="interval" class="dropdown">
+        <option value="1m">1m</option>
+        <option value="5m">5m</option>
+        <option value="15m">15m</option>
+        <option value="1h">1h</option>
+        <option value="4h">4h</option>
+        <option value="1d">1d</option>
+    </select>
+
+    <!-- چارت -->
+    <div id="chart"></div>
+
+    <!-- تحلیل اصلی -->
+    <section class="card">
+        <h3>تحلیل اصلی</h3>
+        <p>روند: <span id="trend"></span></p>
+        <p>Heat: <span id="heat"></span></p>
+        <p>نوسان: <span id="volatility"></span></p>
+        <p>ریسک: <span id="risk"></span></p>
+        <p>موقعیت قیمت: <span id="zone"></span></p>
+        <p>مومنتوم: <span id="momentum"></span></p>
+    </section>
+
+    <!-- احتمالات -->
+    <section class="card">
+        <h3>احتمالات</h3>
+        <p>صعود: <span id="prob-up"></span></p>
+        <p>نزول: <span id="prob-down"></span></p>
+        <p>رنج: <span id="prob-range"></span></p>
+    </section>
+
+    <!-- قدرت‌ها -->
+    <section class="card">
+        <h3>قدرت‌ها</h3>
+        <p>قدرت خریدار: <span id="buyer"></span></p>
+        <p>قدرت فروشنده: <span id="seller"></span></p>
+        <p>قدرت کندل آخر: <span id="last-candle"></span></p>
+        <p>نقشه کندل‌ها: <span id="cmap"></span></p>
+    </section>
+
+    <!-- ستاپ‌ها -->
+    <section class="card">
+        <h3>ستاپ‌ها</h3>
+        <p>Early: <span id="early"></span></p>
+        <p>Prime: <span id="prime"></span></p>
+    </section>
+
+    <!-- ماژول‌های پیشرفته -->
+    <section class="card">
+        <h3>ماژول‌های پیشرفته</h3>
+        <p>Bias: <span id="bias"></span></p>
+        <p>Strength Score: <span id="strength"></span></p>
+        <p>Impulse: <span id="impulse"></span></p>
+        <p>Micro Volume: <span id="microvol"></span></p>
+        <p>Wick Ratio: <span id="wick"></span></p>
+        <p>Support: <span id="support"></span></p>
+        <p>Resistance: <span id="resistance"></span></p>
+        <p>Trend Confidence: <span id="confidence"></span></p>
+        <p>Noise Filter: <span id="noise"></span></p>
+        <p>Momentum Angle: <span id="angle"></span></p>
+        <p>Micro Trend: <span id="microtrend"></span></p>
+    </section>
+
+    <!-- فایل اصلی برنامه -->
+    <script src="app.js"></script>
+
+</body>
+</html>
