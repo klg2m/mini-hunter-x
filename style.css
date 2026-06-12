@@ -1,0 +1,75 @@
+/* --- تنظیمات کلی --- */
+body {
+    background: #000;
+    color: #eee;
+    font-family: sans-serif;
+    margin: 0;
+    padding: 10px;
+    direction: rtl;
+}
+
+/* --- عنوان --- */
+.title {
+    text-align: center;
+    font-size: 22px;
+    margin-bottom: 15px;
+    color: #4da3ff;
+}
+
+/* --- Dropdown ها --- */
+.dropdown {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    background: #111;
+    color: #eee;
+    border: 1px solid #333;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+/* --- چارت --- */
+#chart {
+    height: 300px;
+    background: #111;
+    border: 1px solid #222;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+/* --- کارت‌ها --- */
+.card {
+    background: #111;
+    border: 1px solid #222;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.card h3 {
+    margin-top: 0;
+    color: #4da3ff;
+    font-size: 18px;
+}
+
+/* --- متن‌ها --- */
+p {
+    margin: 6px 0;
+    font-size: 15px;
+}
+
+/* --- مقادیر خروجی --- */
+span {
+    color: #00ff9d;
+    font-weight: bold;
+}
+
+/* --- ریسپانسیو برای موبایل --- */
+@media (max-width: 480px) {
+    #chart {
+        height: 260px;
+    }
+    .title {
+        font-size: 20px;
+    }
+}
